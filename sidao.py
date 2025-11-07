@@ -36,11 +36,53 @@ def login_page():
             font-size: 1rem;
             margin-bottom: 2rem;
         }
+        .secret-letter {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        .secret-letter .tooltip-text {
+            visibility: hidden;
+            width: 280px;
+            background-color: #ff69b4;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            padding: 12px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -140px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+            font-weight: normal;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+        .secret-letter .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #ff69b4 transparent transparent transparent;
+        }
+        .secret-letter:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
         </style>
     """, unsafe_allow_html=True)
     
     st.markdown('<div class="login-container">', unsafe_allow_html=True)
-    st.markdown('<div class="login-title">🔐 SIDAO</div>', unsafe_allow_html=True)
+    st.markdown('''
+        <div class="login-title">
+            🔐 SIDA<span class="secret-letter">O<span class="tooltip-text">💝 Fernanda, você é o motivo dos meus melhores sorrisos</span></span>
+        </div>
+    ''', unsafe_allow_html=True)
     st.markdown('<div class="login-subtitle">Sistema de Detecção Automática de Outliers</div>', unsafe_allow_html=True)
     
     # Formulário de login
