@@ -63,8 +63,8 @@ def login_page():
     st.markdown("---")
     st.markdown("""
         <div style='text-align: center; color: #999; font-size: 0.8rem;'>
-            <p>Sistema desenvolvido para validação de Resultados - CIC2025</p>
-            <p>Entre em contato com a CIC caso tenha esquecido sua senha</p>
+            <p>Sistema desenvolvido para TCE-RJ</p>
+            <p>Entre em contato com o administrador caso tenha esquecido sua senha</p>
         </div>
     """, unsafe_allow_html=True)
 
@@ -96,6 +96,16 @@ import requests
 from io import BytesIO
 
 st.set_page_config(page_title="Detecção de Outliers", layout="wide")
+
+# Definir zoom da página em 80%
+st.markdown("""
+    <style>
+    body {
+        zoom: 80%;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 st.title("📊 SIDAO - SISTEMA DE DETECÇÃO AUTOMÁTICA DE OUTLIERS")
 
 # ============================
