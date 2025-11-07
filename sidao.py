@@ -2,6 +2,81 @@ import streamlit as st
 import polars as pl
 import numpy as np
 
+# ============================
+# SISTEMA DE LOGIN
+# ============================
+def check_login():
+    """Verifica se o usuário está autenticado"""
+    if 'authenticated' not in st.session_state:
+        st.session_state.authenticated = False
+    return st.session_state.authenticated
+
+def login_page():
+    """Exibe a página de login"""
+    st.set_page_config(page_title="Login - SIDAO", layout="centered")
+    
+    # Centralizar e estilizar a página de login
+    st.markdown("""
+        <style>
+        .login-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .login-title {
+            text-align: center;
+            color: #1f77b4;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .login-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
+    st.markdown('<div class="login-container">', unsafe_allow_html=True)
+    st.markdown('<div class="login-title">🔐 SIDAO</div>', unsafe_allow_html=True)
+    st.markdown('<div class="login-subtitle">Sistema de Detecção Automática de Outliers</div>', unsafe_allow_html=True)
+    
+    # Formulário de login
+    with st.form("login_form"):
+        username = st.text_input("Usuário", placeholder="Digite seu usuário")
+        password = st.text_input("Senha", type="password", placeholder="Digite sua senha")
+        submit = st.form_submit_button("Entrar", use_container_width=True)
+        
+        if submit:
+            if username == "AdminCIC" and password == "CICTCERJ25@!":
+                st.session_state.authenticated = True
+                st.success("✅ Login realizado com sucesso!")
+                st.rerun()
+            else:
+                st.error("❌ Usuário ou senha incorretos")
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Informações adicionais
+    st.markdown("---")
+    st.markdown("""
+        <div style='text-align: center; color: #999; font-size: 0.8rem;'>
+            <p>Sistema desenvolvido para validação de Resultados - CIC2025</p>
+            <p>Entre em contato com a CIC caso tenha esquecido sua senha</p>
+        </div>
+    """, unsafe_allow_html=True)
+
+# Verificar autenticação antes de executar o script principal
+if not check_login():
+    login_page()
+    st.stop()
+
+# ============================
+# SCRIPT PRINCIPAL (após login)
+# ============================
+
 # Função de formatação numérica
 
 def formatar_numero(x):
@@ -201,6 +276,18 @@ df = df.with_columns([
 # Configuração (sidebar)
 # ============================
 with st.sidebar:
+    # Botão de logout no topo da sidebar
+    st.markdown(f"""
+        <div style='text-align: right; color: #666; font-size: 0.85rem; margin-bottom: 1rem;'>
+            👤 Usuário: <strong>AdminCIC</strong>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    if st.button("🚪 Sair", use_container_width=True):
+        st.session_state.authenticated = False
+        st.rerun()
+    
+    st.markdown("---")
     st.header("Configuração")
 
     candidate_groups = [c for c in ["municipio", "ug", "descricao", "regiao"] if c in df.columns]
