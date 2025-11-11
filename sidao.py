@@ -80,8 +80,7 @@ def login_page():
     st.markdown('<div class="login-container">', unsafe_allow_html=True)
     st.markdown('''
         <div class="login-title">
-            🔐 SIDA<span class="secret-letter">O<span class="tooltip-text">💝 Fernanda, você é o motivo dos meus melhores sorrisos</span></span>
-        </div>
+            🔐 SIDA<span class="secret-letter">O<span class="tooltip-text">
     ''', unsafe_allow_html=True)
     st.markdown('<div class="login-subtitle">Sistema de Detecção Automática de Outliers</div>', unsafe_allow_html=True)
     
@@ -259,7 +258,7 @@ def fmt_int_br(n):
 st.sidebar.markdown("**Fonte dos dados**")
 source_url = st.sidebar.text_input(
     "URL do arquivo CSV (SharePoint/OneDrive)",
-    value="https://tcerj365-my.sharepoint.com/:x:/g/personal/emanuellipc_tcerj_tc_br/EfP4k4gSRb5EhjjrRkYyCuwBRy855XAz46Rc6aPgPM1LlA?e=X0wHDt",
+    value="https://tcerj365-my.sharepoint.com/:x:/g/personal/emanuellipc_tcerj_tc_br/IQDhqEiwpZtyT6zv14F9CCNiAb_5wdrHEPC7AJlIBYi1qwk?rtime=sBoqAzAh3kg",
     help="Cole o link público do CSV. Forçaremos download direto (download=1)."
 )
 
